@@ -4,7 +4,7 @@ select rownum as ID,
  SAL_SEGUNDO_APELLIDO as ALUMNO_AMATERNO,
  SAL_SEXO_ALUMNO as ALUMNO_GENERO, SIS_SES_CCT_ESCUELA as CCT,
  REGEXP_REPLACE(vista.nombreescuela,'( ){2,}', ' ') as NOMBRE_ESCUELA, vista.turno as TURNO,
- CASE WHEN SNE_DESCCRIPCION_LARGA_NIVEL = 'INICIAL LACTANTES' THEN 'LACTANTE' 
+ CASE WHEN SNE_DESCCRIPCION_LARGA_NIVEL = 'INICIAL LACTANTES' THEN 'LACTANTE'
  ELSE SNE_DESCCRIPCION_LARGA_NIVEL END as NIVEL,
  vista.grado as GRADO,
  vista.colonia_cct as COLONIA, vista.alcaldia_cct as ALCALDIA,
@@ -15,14 +15,14 @@ select rownum as ID,
            ELSE null
        END AS TUTOR_NOMBRE,
  CASE WHEN INSTR(vista.tutor, ' ', 1, 2) > 0
-           THEN SUBSTR(REVERSE(SUBSTR(REVERSE(vista.tutor), 1, 
-                       INSTR(REVERSE(vista.tutor), ' ', 1, 2) - 1)),1, LENGTH(REVERSE(SUBSTR(REVERSE(vista.tutor), 1, 
-                       INSTR(REVERSE(vista.tutor), ' ', 1, 2) - 1))) - INSTR(REVERSE(REVERSE(SUBSTR(REVERSE(vista.tutor), 1, 
+           THEN SUBSTR(REVERSE(SUBSTR(REVERSE(vista.tutor), 1,
+                       INSTR(REVERSE(vista.tutor), ' ', 1, 2) - 1)),1, LENGTH(REVERSE(SUBSTR(REVERSE(vista.tutor), 1,
+                       INSTR(REVERSE(vista.tutor), ' ', 1, 2) - 1))) - INSTR(REVERSE(REVERSE(SUBSTR(REVERSE(vista.tutor), 1,
                        INSTR(REVERSE(vista.tutor), ' ', 1, 2) - 1))), ' ', 1, 1))
            ELSE null
        END AS TUTOR_APATERNO,
  CASE WHEN INSTR(vista.tutor, ' ') > 0
-           THEN REVERSE(SUBSTR(REVERSE(vista.tutor), 1, 
+           THEN REVERSE(SUBSTR(REVERSE(vista.tutor), 1,
                        INSTR(REVERSE(vista.tutor), ' ') - 1))
            ELSE vista.tutor
        END AS TUTOR_AMATERNO,
