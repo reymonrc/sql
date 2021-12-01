@@ -59,7 +59,7 @@ select *
 from MATRICULA.sed_inscripciones where
 SIS_SCE_CVE_CICLO_ESCOLAR = '2021-2022' and
 matricula.sed_inscripciones.sis_firma_digital = 1 and
-sis_sal_curp_alumno = 'RAGM981021MVZMRR07';
+sis_sal_curp_alumno in ('CAVD160331HDFMDGA6','RAGM981021MVZMRR07');
 
 select *
 from MATRICULA.sed_inscripciones
@@ -72,5 +72,6 @@ select sis_sal_curp_alumno
 -- matricula.sed_niveles_escolares.sne_desccripcion_larga_nivel as NIVEL_AEFCM
 from MATRICULA.sed_inscripciones
 where SIS_SCE_CVE_CICLO_ESCOLAR = '2021-2022' -- and matricula.sed_inscripciones.sis_sal_curp_alumno=val.alumno_curp
-and matricula.sed_inscripciones.sis_firma_digital = 1
+and matricula.sed_inscripciones.sis_firma_digital = 1 
+and matricula.sed_inscripciones.sis_sal_curp_alumno in (SELECT ALUMNO_CURP from PROCESA_INFORMACION.valida_alumnos_fidegar)
 group by sis_sal_curp_alumno having count(*) > 1);
