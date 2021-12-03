@@ -35,7 +35,7 @@ vista.parentesco as TUTOR_PARENTESCO,
  vista.calle as TUTOR_CALLE, vista.colonia as TUTOR_COLONIA,
  vista.alcaldia as TUTOR_MUNICIPIO,
  vista.codigo_postal as TUTOR_CODIGO_POSTAL, SIS_SCE_CVE_CICLO_ESCOLAR as CICLO_ESCOLAR,
-'PROCESA_INFORMACION' as USUARIO_CREACION, CURRENT_DATE as FECHA_CREACION
+'PROCESA_INFORMACION-rrc' as USUARIO_CREACION, CURRENT_DATE as FECHA_CREACION
 from SED_ALUMNOS left JOIN MATRICULA.sed_inscripciones
  on sed_alumnos.sal_curp_alumno = matricula.sed_inscripciones.sis_sal_curp_alumno
  and matricula.sed_inscripciones.sis_firma_digital = 1
