@@ -37,7 +37,7 @@ end nivel_educativo
 , CASE when SI.SIS_SNE_CVE_NIVEL_ESCOLAR = 5
           then 'LABORAL'
        when substr(SI.SIS_SES_CCT_ESCUELA,4,2) in ('ML','CO') and SI.SIS_SNE_CVE_NIVEL_ESCOLAR != 5
-          then DECODE(SI.SIS_SNE_CVE_NIVEL_ESCOLAR
+          then DECODE(SI.sis_sge_cve_grado_escolar
                                      ,0 ,'INICIAL LACTANTES'
                                      ,1 ,'INICIAL MATERNAL'
                                      ,2 ,'PREESCOLAR'
@@ -56,6 +56,12 @@ end nivel_educativo
                                     ,6,'SEXTO'
                                     ,sis_sge_cve_grado_escolar
                                     )
+       when SI.SIS_SNE_CVE_NIVEL_ESCOLAR in (0,1)
+          then DECODE(SI.sis_sge_cve_grado_escolar
+                                     ,1 ,'INICIAL LACTANTES'
+                                     ,2 ,'INICIAL MATERNAL'
+                                     ,sis_sge_cve_grado_escolar
+                                     )
         else sis_sge_cve_grado_escolar 
 end GRADO_ESCOLAR
 , bdsos.des_sostenimiento as SOSTENIMIENTO
@@ -115,7 +121,7 @@ end)
       when fi.colonia!= (CASE when SI.SIS_SNE_CVE_NIVEL_ESCOLAR = 5
           then 'LABORAL'
        when substr(SI.SIS_SES_CCT_ESCUELA,4,2) in ('ML','CO') and SI.SIS_SNE_CVE_NIVEL_ESCOLAR != 5
-          then DECODE(SI.SIS_SNE_CVE_NIVEL_ESCOLAR
+          then DECODE(SI.sis_sge_cve_grado_escolar
                                      ,0 ,'INICIAL LACTANTES'
                                      ,1 ,'INICIAL MATERNAL'
                                      ,2 ,'PREESCOLAR'
@@ -134,11 +140,17 @@ end)
                                     ,6,'SEXTO'
                                     ,sis_sge_cve_grado_escolar
                                     )
+       when SI.SIS_SNE_CVE_NIVEL_ESCOLAR in (0,1) and substr(SI.SIS_SES_CCT_ESCUELA,4,2) not in ('ML','CO')   
+          then DECODE(SI.sis_sge_cve_grado_escolar
+                                     ,1 ,'INICIAL LACTANTES'
+                                     ,2 ,'INICIAL MATERNAL'
+                                     ,sis_sge_cve_grado_escolar
+                                     )
         else sis_sge_cve_grado_escolar 
 end) then (CASE when SI.SIS_SNE_CVE_NIVEL_ESCOLAR = 5
           then 'LABORAL'
        when substr(SI.SIS_SES_CCT_ESCUELA,4,2) in ('ML','CO') and SI.SIS_SNE_CVE_NIVEL_ESCOLAR != 5
-          then DECODE(SI.SIS_SNE_CVE_NIVEL_ESCOLAR
+          then DECODE(SI.sis_sge_cve_grado_escolar
                                      ,0 ,'INICIAL LACTANTES'
                                      ,1 ,'INICIAL MATERNAL'
                                      ,2 ,'PREESCOLAR'
@@ -157,6 +169,12 @@ end) then (CASE when SI.SIS_SNE_CVE_NIVEL_ESCOLAR = 5
                                     ,6,'SEXTO'
                                     ,sis_sge_cve_grado_escolar
                                     )
+       when SI.SIS_SNE_CVE_NIVEL_ESCOLAR in (0,1) and substr(SI.SIS_SES_CCT_ESCUELA,4,2) not in ('ML','CO')   
+          then DECODE(SI.sis_sge_cve_grado_escolar
+                                     ,1 ,'INICIAL LACTANTES'
+                                     ,2 ,'INICIAL MATERNAL'
+                                     ,sis_sge_cve_grado_escolar
+                                     )
         else sis_sge_cve_grado_escolar 
 end)
        ELSE ''
@@ -166,7 +184,7 @@ on fi.alumno_curp = si.sis_sal_curp_alumno
 left join BDUNICA.cct bdcct on fi.cct=bdcct.cct
 left join BDUNICA.sostenimiento bdsos on bdcct.cod_sostenimiento = bdsos.cod_sostenimiento
 where SI.SIS_SCE_CVE_CICLO_ESCOLAR = '2021-2022'
---and substr(SI.SIS_SES_CCT_ESCUELA,4,2) = 'JN'
+and substr(SI.SIS_SES_CCT_ESCUELA,3,1) = 'P'
 -- and grado = 'ADULTOS'
 -- and NIVEL = 'CAM PREESCOLAR'
 --and
