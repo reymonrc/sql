@@ -469,5 +469,5 @@ where
 asignacion_cct is not null
 --asignacion_turno is  null
 ;
-
+TO_NUMBER('100.00');
 select * from p2122_pasg1819_alumnos_pre where curp = 'MXAS180208HDFDNNA6'
