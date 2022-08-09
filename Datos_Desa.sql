@@ -44,6 +44,7 @@ COORDINACION as DIRECCION_GENERAL
 from mview_alumnos_20212022 vista
 left join cct bdu on vista.cct = bdu.cct
 left join sostenimiento sos on sos.cod_sostenimiento = bdu.cod_sostenimiento
+where curp in ('ZUNC790612P50','LARC841129UF4','MUGP850402HB9','COPC870131FS4','PAVV771011BHA')
 ;
 
 ---
